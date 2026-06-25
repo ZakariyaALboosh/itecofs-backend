@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import ContactForm, HomepageStats, News, NewsImage, Project, ProjectImage, Service
+from .models import ContactForm, HomepageStats, News, NewsImage, Project, ProjectImage, Service, SupplierRegistration
 
 
 class NewsImageInline(admin.TabularInline):
@@ -86,3 +86,11 @@ class ContactFormAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone_number', 'service', 'created_at')
     search_fields = ('name', 'email', 'phone_number', 'service')
     list_filter = ('created_at',)
+
+
+@admin.register(SupplierRegistration)
+class SupplierRegistrationAdmin(admin.ModelAdmin):
+    list_display = ('vendor_name', 'country', 'cr_number', 'fp_name', 'fp_email', 'created_at')
+    search_fields = ('vendor_name', 'country', 'cr_number', 'fp_name', 'fp_email', 'email')
+    list_filter = ('country', 'operates_libya', 'created_at')
+    readonly_fields = ('created_at',)
