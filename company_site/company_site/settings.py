@@ -79,6 +79,13 @@ MEDIA_ROOT = '/home/itecofsc/public_html/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CLIENT_INBOX_EMAIL = os.getenv('CLIENT_INBOX_EMAIL', 'info@itecofs.com')
+CLIENT_INBOX_NAME = os.getenv('CLIENT_INBOX_NAME', 'ITEC Oilfield Services')
+BREVO_API_KEY = os.getenv('BREVO_API_KEY', '')
+BREVO_SENDER_EMAIL = os.getenv('BREVO_SENDER_EMAIL', CLIENT_INBOX_EMAIL)
+BREVO_SENDER_NAME = os.getenv('BREVO_SENDER_NAME', 'ITEC Website')
+BREVO_TIMEOUT_SECONDS = int(os.getenv('BREVO_TIMEOUT_SECONDS', '10'))
+
 cors_all = os.getenv('CORS_ALLOW_ALL_ORIGINS', 'True').lower() in {'1', 'true', 'yes'}
 CORS_ALLOW_ALL_ORIGINS = cors_all
 if not cors_all:
