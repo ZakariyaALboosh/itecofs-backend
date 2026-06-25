@@ -47,6 +47,12 @@ The project is now configurable for deployment:
 - `CORS_ALLOW_ALL_ORIGINS` (`False` for production)
 - `CORS_ALLOWED_ORIGINS` (comma-separated, required when not allowing all)
 - `SQLITE_NAME` (optional sqlite filename)
+- `BREVO_API_KEY` (required to send contact/supplier notifications through Brevo)
+- `BREVO_SENDER_EMAIL` (defaults to `CLIENT_INBOX_EMAIL`)
+- `BREVO_SENDER_NAME` (defaults to `ITEC Website`)
+- `CLIENT_INBOX_EMAIL` (defaults to `info@itecofs.com`)
+- `CLIENT_INBOX_NAME` (defaults to `ITEC Oilfield Services`)
+- `BREVO_TIMEOUT_SECONDS` (defaults to `10`)
 
 See `.env.example`.
 
@@ -56,13 +62,13 @@ See `.env.example`.
 - `GET/PUT/PATCH/DELETE /api/homepage/{id}/`
 - `GET/POST /api/services/`
 - `GET/PUT/PATCH/DELETE /api/services/{id}/`
-- `GET/POST /api/contact/`
+- `GET/POST /api/contact/` — POST stores the contact request and emails its contents to the configured client inbox via Brevo.
 - `GET/PUT/PATCH/DELETE /api/contact/{id}/`
 - `GET/POST /api/news/`
 - `GET/PUT/PATCH/DELETE /api/news/{id}/`
 - `GET/POST /api/projects/`
 - `GET/PUT/PATCH/DELETE /api/projects/{id}/`
-- `GET/POST /api/supplier-registration/`
+- `GET/POST /api/supplier-registration/` — POST stores the submission and emails its contents/files to the configured client inbox via Brevo.
 - `GET/PUT/PATCH/DELETE /api/supplier-registration/{id}/`
 
 ## cURL Examples
