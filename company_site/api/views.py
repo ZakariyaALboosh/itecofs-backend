@@ -1,12 +1,13 @@
 from rest_framework import viewsets
 
-from .models import ContactForm, HomepageStats, News, Project, Service
+from .models import ContactForm, HomepageStats, News, Project, Service, SupplierRegistration
 from .serializers import (
     ContactFormSerializer,
     HomepageStatsSerializer,
     NewsSerializer,
     ProjectSerializer,
     ServiceSerializer,
+    SupplierRegistrationSerializer,
 )
 
 
@@ -35,3 +36,8 @@ class NewsViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.prefetch_related('images').all()
     serializer_class = ProjectSerializer
+
+
+class SupplierRegistrationViewSet(viewsets.ModelViewSet):
+    queryset = SupplierRegistration.objects.all()
+    serializer_class = SupplierRegistrationSerializer

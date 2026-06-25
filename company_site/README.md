@@ -1,6 +1,6 @@
 # Company Website Backend (Django + DRF)
 
-Production-oriented Django REST Framework backend with full CRUD APIs for homepage stats, services, news (with ordered images), and projects (with execution list and ordered images).
+Production-oriented Django REST Framework backend with full CRUD APIs for homepage stats, services, contact forms, supplier registrations, news (with ordered images), and projects (with execution list and ordered images).
 
 ## Features
 
@@ -62,6 +62,8 @@ See `.env.example`.
 - `GET/PUT/PATCH/DELETE /api/news/{id}/`
 - `GET/POST /api/projects/`
 - `GET/PUT/PATCH/DELETE /api/projects/{id}/`
+- `GET/POST /api/supplier-registration/`
+- `GET/PUT/PATCH/DELETE /api/supplier-registration/{id}/`
 
 ## cURL Examples
 
@@ -145,4 +147,47 @@ python manage.py collectstatic --noinput
 
 ```bash
 gunicorn company_site.wsgi:application --bind 0.0.0.0:8000
+```
+
+
+### Supplier Registration Submission
+
+Submit this endpoint as `multipart/form-data` because the form includes certificate/profile file uploads. Array/object fields can be sent as JSON strings.
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/supplier-registration/ \
+  -F "vendorName=Example Vendor" \
+  -F "country=Libya" \
+  -F "crNumber=CR-12345" \
+  -F "estYear=2010" \
+  -F 'supplierType=["Manufacturer","Authorized Distributor"]' \
+  -F "hqAddress=Street, City, Country" \
+  -F "operatesLibya=Yes" \
+  -F "crCertificate=@/path/to/cr.pdf" \
+  -F "orgChart=@/path/to/org.pdf" \
+  -F "companyProfile=@/path/to/profile.pdf" \
+  -F "fpName=Jane Doe" \
+  -F "fpPosition=Sales Manager" \
+  -F "fpPhone=+218 91 000 0000" \
+  -F "fpEmail=jane@example.com" \
+  -F "taxRegistrationCertificate=@/path/to/tax.pdf" \
+  -F "bankName=Bank Name" \
+  -F "accountName=Example Vendor LLC" \
+  -F "iban=LY00 0000 0000 0000 0000 0000" \
+  -F "swift=ABCDEFGH" \
+  -F "branchName=Tripoli Main Branch" \
+  -F "branchAddress=Tripoli, Libya" \
+  -F "currency=LYD" \
+  -F 'registrationType=["Supply","Services"]' \
+  -F "productTypes=Oilfield equipment and services" \
+  -F "warrantyTerms=Standard warranty terms" \
+  -F "supportInfo=Support contact details" \
+  -F 'certs={"iso9001":"Yes","iso14001":"No","iso45001":"Yes","apiq1":"No","apiq2":"No"}' \
+  -F "leadTime=2-4 weeks" \
+  -F "exportPorts=Tripoli" \
+  -F "logisticsAddress=Main logistics office address" \
+  -F "accepted=true" \
+  -F "representative=Jane Doe" \
+  -F "position=Managing Director" \
+  -F "email=jane@example.com"
 ```
